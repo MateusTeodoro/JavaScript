@@ -30,6 +30,22 @@
                     return false;
                 }
             }
+
+            function formatarCPF(numCPF)
+            {
+                let valor = numCPF.value;
+
+                if(valor.length == 3 || valor.length == 7)
+                {
+                    numCPF.value = numCPF.value + ".";
+                }
+
+                if(valor.length == 11)
+                {
+                    numCPF.value = numCPF.value + "-";
+                }
+            }
+
         </script>
     </head>
 
@@ -39,7 +55,7 @@
 
             Nome: <input type="text" name="nome"><br><br>
             
-            CPF: <input type="text" id="cpf" name="cpf" maxlength="14" oninput="if(this.value.length == 3){value = value.replace(value,value + '.')}"><br><br>
+            CPF: <input type="text" id="cpf" name="cpf" maxlength="14" onkeypress="formatarCPF(this)"><br><br>
             
             E-mail: <input type="text" name="email"><br><br>
             
