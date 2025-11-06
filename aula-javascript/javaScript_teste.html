@@ -4,23 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Teste jQuery</title>
-    
+
     <style></style>
-    
+
     <script type="text/javascript" src="/script/jquery-3.7.1.js"></script>
-    
+
     <script>
-        $(document).ready(function()
-        {
-            $("#funcao1").click(function()
-            {
+        $(document).ready(function () {
+            $("tr:even", $("tbody")).css("background", "pink");
+
+            $("#funcao1").click(function () {
                 $("#receita").css("background-color", "red");
                 $(".form_verde").css("background", "green");
                 $("#receita, .form_verde, p").css("color", "pink");
-            })
+            });
+
+            $("#funcao2").click(function () {
+                $("tr:even", $("tbody")).css("background", "white");
+                $("tr:odd", $("tbody")).css("background", "#DDDDDD");
+            });
+
+            $("#funcao3").click(function () {
+                let cidade = $("#cidade").val(); //Pega o valor
+                //alert(cidade);
+                $("li").css("background", "white");
+                $("li:eq(" + (cidade - 1) + ")").css("background", "pink");
+            });
+
+            $("#funcao4").click(function () {
+                let cidadeDigitada = $("#cidade2").val().toLowerCase().trim(); // Pega o texto digitado
+                let encontrada = false;
+
+                $("li").each(function () {
+                    let nomeCidade = $(this).text().toLowerCase().trim();
+
+                    // Limpa o fundo antes de pintar
+                    $(this).css("background", "white");
+
+                    // Se for igual, destaca
+                    if (nomeCidade === cidadeDigitada) {
+                        $(this).css("background", "pink");
+                        encontrada = true;
+                    }
+                });
+
+                // Se não encontrar, pode avisar o usuário
+                if (!encontrada) {
+                    alert("Cidade não encontrada na lista!");
+                }
+            });
         });
+
     </script>
 </head>
 
@@ -28,7 +64,7 @@
     <div id="receita">
         <p> Ingredientes </p>
         <p>Modo de fazer </p>
-        </div>
+    </div>
 
     <form class="form_verde">
         Nome <input type="text" name="nome"><br />
@@ -36,7 +72,69 @@
         Texto <input type="text" name="texto"> <br />
         <input type="submit" name="Enviar" value="Enviar"><br />
     </form>
-    
+
     <button type="button" id="funcao1"> Função 1 </button>
+
+    <table>
+        <tr>
+            <td> Nome </td>
+            <td> CPF </td>
+            <td> Telefone </td>
+        </tr>
+
+        <tr>
+            <td>João Silva</td>
+            <td>123.456.789-00</td>
+            <td>(11) 98765-4321</td>
+        </tr>
+
+        <tr>
+            <td>Ana Souza</td>
+            <td>234.567.890-11</td>
+            <td>(21) 99876-5432</td>
+        </tr>
+
+        <tr>
+            <td>Carlos Pereira</td>
+            <td>345.678.901-22</td>
+            <td>(31) 91234-5678</td>
+        </tr>
+
+        <tr>
+            <td>Maria Oliveira</td>
+            <td>456.789.012-33</td>
+            <td>(41) 92345-6789</td>
+        </tr>
+
+        <tr>
+            <td>Pedro Costa</td>
+            <td>567.890.123-44</td>
+            <td>(51) 93456-7890</td>
+        </tr>
+    </table>
+
+    <button type="button" id="funcao2"> Função 2 </button>
+
+    <h2>Lista de Cidades</h2>
+    <ul>
+        <li>São Paulo</li>
+        <li>Rio de Janeiro</li>
+        <li>Belo Horizonte</li>
+        <li>Curitiba</li>
+        <li>Porto Alegre</li>
+        <li>Recife</li>
+        <li>Salvador</li>
+        <li>Fortaleza</li>
+        <li>Manaus</li>
+        <li>Brasília</li>
+    </ul>
+
+    <input type="text" name="cidade" id="cidade"> <br />
+    <button type="button" id="funcao3"> Selecione Cidade </button>
+
+    <input type="text" name="cidade2" id="cidade2"> <br />
+    <button type="button" id="funcao4"> Buscar Cidade </button>
+
 </body>
+
 </html>
